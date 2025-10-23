@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const CryptoIcon = ({ name, svg }) => (
   <div
-    className="w-12 h-12 flex items-center justify-center p-2 bg-white/5 rounded-lg backdrop-blur-sm border border-white/5"
-    style={{ animation: 'floaty 4s ease-in-out infinite' }}
+    className="w-16 h-16 flex items-center justify-center p-3 
+               bg-white/5 rounded-xl border border-white/10 
+               backdrop-blur-sm animate-float"
     title={name}
     dangerouslySetInnerHTML={{ __html: svg }}
   />
@@ -126,23 +127,23 @@ export default function App() {
 
         {/* --- Passion Crypto --- */}
         <motion.section
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-white/3 rounded-2xl p-6 mb-6 backdrop-blur-sm border border-white/5"
-        >
-          <h2 className="text-2xl font-bold">Passion Crypto</h2>
-          <p className="mt-3 text-white/80">
-            Je suis passionné par la crypto et j'explore continuellement la
-            sécurité des protocoles, des wallets et le développement
-            d'applications décentralisées.
-          </p>
-          <div className="mt-4 flex gap-3">
-            <CryptoIcon name="Bitcoin" svg={bitcoin} />
-            <CryptoIcon name="Ethereum" svg={ethereum} />
-            <CryptoIcon name="Solana" svg={solana} />
-          </div>
-        </motion.section>
+  initial={{ opacity: 0, y: 12 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="bg-white/3 rounded-2xl p-6 mb-6 backdrop-blur-sm border border-white/5"
+>
+  <h2 className="text-2xl font-bold">Passion Crypto</h2>
+  <p className="mt-3 text-white/80">
+    Je suis passionné par la crypto et j'explore continuellement la sécurité
+    des protocoles, des wallets et le développement d'applications décentralisées.
+  </p>
+
+  <div className="mt-6 flex flex-wrap justify-center sm:justify-start gap-4">
+    <CryptoIcon name="Bitcoin" svg={bitcoin} />
+    <CryptoIcon name="Ethereum" svg={ethereum} />
+    <CryptoIcon name="Solana" svg={solana} />
+  </div>
+</motion.section>
 
         {/* --- Contact --- */}
         <motion.section
