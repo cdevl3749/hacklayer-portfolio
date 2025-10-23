@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg: #0A0A0A;
+  --green: #00FF99;
+  --blue: #0077FF;
+}
+
+body{
+  background: var(--bg);
+  color: #e6f2ff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+/* Typing cursor for splash */
+.typing-cursor {
+  display: inline-block;
+  width: 10px;
+  height: 22px;
+  background: var(--green);
+  margin-left: 6px;
+  animation: blink 1s steps(2, start) infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Neon glow */
+.neon {
+  text-shadow: 0 0 8px rgba(0,255,153,0.12), 0 0 20px rgba(0,119,255,0.05);
+}
+
+/* crypto icon float */
+@keyframes floaty {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
