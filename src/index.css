@@ -44,14 +44,11 @@ body{
 }
 
 @keyframes floaty {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 .animate-float {
-  animation: floaty 3s ease-in-out infinite;
+  animation: floaty 4s ease-in-out infinite;
 }
+
