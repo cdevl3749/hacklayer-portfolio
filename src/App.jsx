@@ -358,15 +358,6 @@ export default function App() {
                 </motion.div>
               )}
 
-              <div className="mt-4 text-sm text-white/70">
-                Contact direct :{' '}
-                <a
-                  href="mailto:cdevl3749@gmail.com"
-                  className="underline text-[#00FF99]"
-                >
-                  cdevl3749@gmail.com
-                </a>
-              </div>
             </div>
 
             <div className="p-4 rounded-lg bg-black/40 border border-white/6">
