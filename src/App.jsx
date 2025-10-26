@@ -68,21 +68,22 @@ export default function App() {
       <div className="relative z-10 max-w-4xl mx-auto p-6">
         {/* --- En-tête --- */}
         <header className="flex items-center gap-6 py-8">
-          <div className="w-20 h-20 rounded-xl bg-white/5 flex items-center justify-center border border-white/5">
-            <div className="text-xl font-mono neon">HL</div>
-          </div>
-          <div>
-            <h1 className="text-3xl md:text-4xl font-extrabold">
-              HackLayer — Cybersécurité & Développement Web
-            </h1>
+  <div className="w-20 h-20 rounded-xl flex items-center justify-center border border-green-500/30 bg-black shadow-[0_0_20px_#00ff80]">
+    <div className="text-3xl font-bold text-green-400 drop-shadow-[0_0_8px_#00ff80] font-mono">
+      HL
+    </div>
+  </div>
+  <div>
+    <h1 className="text-3xl md:text-4xl font-extrabold">
+      HackLayer — Cybersécurité & Développement Web
+    </h1>
+    <p className="mt-2 text-sm text-white/70">
+      Plus de 10 ans d'expérience — Pentesting, Kali Linux, Smart
+      Contracts & développement full-stack
+    </p>
+  </div>
+</header>
 
-
-            <p className="mt-2 text-sm text-white/70">
-              Plus de 10 ans d'expérience — Pentesting, Kali Linux, Smart
-              Contracts & développement full-stack
-            </p>
-          </div>
-        </header>
 
         {/* --- À propos --- */}
         <motion.section
