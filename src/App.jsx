@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from "react-router-dom"
@@ -68,21 +69,34 @@ export default function App() {
 
       <div className="relative z-10 max-w-4xl mx-auto p-6">
         {/* --- En-tête --- */}
-        <header className="flex items-center gap-6 py-8">
-          <div className="w-20 h-20 rounded-xl flex items-center justify-center border border-green-500/30 bg-black shadow-[0_0_20px_#00ff80]">
-            <div className="text-3xl font-bold text-green-400 drop-shadow-[0_0_8px_#00ff80] font-mono">
-              HL
+        <header className="flex items-center justify-between gap-6 py-8">
+          <div className="flex items-center gap-6">
+            <div className="w-20 h-20 rounded-xl flex items-center justify-center border border-green-500/30 bg-black shadow-[0_0_20px_#00ff80]">
+              <div className="text-3xl font-bold text-green-400 drop-shadow-[0_0_8px_#00ff80] font-mono">
+                HL
+              </div>
+            </div>
+            <div>
+              <h1 className="text-3xl md:text-4xl font-extrabold">
+                HackLayer — Cybersécurité & Développement Web
+              </h1>
+              <p className="mt-2 text-sm text-white/70">
+                Plus de 10 ans d'expérience — Pentesting, Kali Linux, Smart
+                Contracts & développement full-stack
+              </p>
             </div>
           </div>
-          <div>
-            <h1 className="text-3xl md:text-4xl font-extrabold">
-              HackLayer — Cybersécurité & Développement Web
-            </h1>
-            <p className="mt-2 text-sm text-white/70">
-              Plus de 10 ans d'expérience — Pentesting, Kali Linux, Smart
-              Contracts & développement full-stack
-            </p>
-          </div>
+          
+          {/* 🚀 Bouton CTA header (caché sur mobile) */}
+          <Link
+            to="/pentest"
+            className="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-lg 
+                       font-semibold text-sm bg-[#00FF99] text-black
+                       hover:bg-[#00DD88] hover:scale-105
+                       transition-all duration-300 whitespace-nowrap shadow-[0_0_15px_rgba(0,255,153,0.3)]"
+          >
+            🔒 Pentest
+          </Link>
         </header>
 
         {/* --- À propos --- */}
@@ -104,6 +118,29 @@ export default function App() {
             je suis passionné par la crypto — sécurité des wallets, audits de
             protocoles et intégration d'apps décentralisées.
           </p>
+          
+          {/* 🚀 NOUVEAU CTA après À propos */}
+          <div className="mt-6 text-center">
+            <Link
+              to="/pentest"
+              className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg 
+                         font-semibold text-base bg-gradient-to-r from-[#00FF99] to-[#00DD88] text-black
+                         shadow-[0_0_15px_rgba(0,255,153,0.3)]
+                         hover:shadow-[0_0_25px_rgba(0,255,153,0.5)]
+                         hover:scale-105 active:scale-95
+                         transition-all duration-300"
+            >
+              🔒 Découvrir mes offres Pentest
+              <svg 
+                className="w-4 h-4 group-hover:translate-x-1 transition-transform" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
+          </div>
         </motion.section>
 
         {/* --- Compétences --- */}
