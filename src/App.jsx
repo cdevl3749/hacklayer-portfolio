@@ -321,25 +321,23 @@ export default function App() {
 
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <form
+          <form
   name="contact"
   method="POST"
   data-netlify="true"
   data-netlify-honeypot="bot-field"
-  data-netlify-recaptcha="true"
   onSubmit={(e) => {
     e.preventDefault();
     const form = e.target;
     const newErrors = {};
 
-    // --- Validation manuelle ---
+    // --- Validation simple ---
     if (!form.nom.value.trim()) newErrors.nom = "Nom requis";
     if (!form.email.value.trim()) newErrors.email = "Email requis";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value))
       newErrors.email = "Adresse email invalide";
     if (!form.message.value.trim()) newErrors.message = "Message requis";
 
-    // Si erreurs, on les stocke et on arrête
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -347,7 +345,6 @@ export default function App() {
 
     setErrors({});
 
-    // --- Encodage des données ---
     const encode = (data) =>
       Object.keys(data)
         .map(
@@ -362,34 +359,33 @@ export default function App() {
       message: form.message.value,
     };
 
-    // ✅ Correction : pas de "?no-cache=1"
+    // ✅ Envoi correct vers Netlify
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode(data),
     })
-      .then((response) => {
-        if (response.ok) {
-          form.reset();
-          setSubmitted(true);
-        } else {
-          alert("❌ Erreur d'envoi du formulaire");
-        }
+      .then(() => {
+        form.reset();
+        setSubmitted(true);
       })
-      .catch(() => alert("❌ Erreur réseau — veuillez réessayer"));
+      .catch(() => alert("❌ Erreur d'envoi"));
   }}
 >
+  {/* --- Champ caché obligatoire pour Netlify --- */}
   <input type="hidden" name="form-name" value="contact" />
 
+  {/* --- Champ honeypot anti-spam --- */}
   <p className="hidden">
     <label>
       Ne pas remplir : <input name="bot-field" />
     </label>
   </p>
 
-  {/* --- Champ Nom --- */}
+  {/* --- Nom --- */}
   <label className="block text-sm text-white/80">Nom</label>
   <input
+    required
     name="nom"
     className={`w-full mt-1 p-3 rounded-md bg-black/40 border ${
       errors?.nom ? "border-red-500" : "border-white/6"
@@ -397,9 +393,10 @@ export default function App() {
   />
   {errors?.nom && <p className="text-red-400 text-sm mt-1">{errors.nom}</p>}
 
-  {/* --- Champ Email --- */}
+  {/* --- Email --- */}
   <label className="block text-sm text-white/80 mt-4">Email</label>
   <input
+    required
     type="email"
     name="email"
     className={`w-full mt-1 p-3 rounded-md bg-black/40 border ${
@@ -408,9 +405,10 @@ export default function App() {
   />
   {errors?.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
 
-  {/* --- Champ Message --- */}
+  {/* --- Message --- */}
   <label className="block text-sm text-white/80 mt-4">Message</label>
   <textarea
+    required
     name="message"
     rows="5"
     className={`w-full mt-1 p-3 rounded-md bg-black/40 border ${
@@ -420,9 +418,6 @@ export default function App() {
   {errors?.message && (
     <p className="text-red-400 text-sm mt-1">{errors.message}</p>
   )}
-
-  {/* --- ReCAPTCHA --- */}
-  <div data-netlify-recaptcha="true" className="my-4" />
 
   {/* --- Boutons --- */}
   <div className="mt-4 flex items-center gap-3">
