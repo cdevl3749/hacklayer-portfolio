@@ -122,7 +122,7 @@ export default function App() {
           {/* 🚀 NOUVEAU CTA après À propos */}
           <div className="mt-6 text-center">
             <Link
-              to="/pentest"
+              to="/pentest#abonnement"
               className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg 
                          font-semibold text-base bg-gradient-to-r from-[#00FF99] to-[#00DD88] text-black
                          shadow-[0_0_15px_rgba(0,255,153,0.3)]
