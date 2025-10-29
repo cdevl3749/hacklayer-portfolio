@@ -89,14 +89,14 @@ export default function App() {
           
           {/* 🚀 Bouton CTA header (caché sur mobile) */}
           <Link
-            to="/pentest"
-            className="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-lg 
-                       font-semibold text-sm bg-[#00FF99] text-black
-                       hover:bg-[#00DD88] hover:scale-105
-                       transition-all duration-300 whitespace-nowrap shadow-[0_0_15px_rgba(0,255,153,0.3)]"
-          >
-            🔒 Pentest
+             to="/pentest#demo"
+             className="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-lg 
+             font-semibold text-sm bg-gradient-to-r from-[#00FF99] to-[#00DD88] text-black
+             hover:scale-105 transition-all duration-300 whitespace-nowrap shadow-[0_0_15px_rgba(0,255,153,0.4)]"
+>
+            🎥 Démonstration
           </Link>
+
         </header>
 
         {/* --- À propos --- */}
@@ -245,6 +245,60 @@ export default function App() {
             </div>
           </div>
         </motion.section>
+
+        {/* Section Pentest Teaser - DANS APP.JSX */}
+<motion.section
+  initial={{ opacity: 0, y: 12 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="bg-white/3 rounded-2xl p-6 mb-6 backdrop-blur-sm border border-white/5"
+>
+  <h2 className="text-2xl font-bold mb-4">Pentesting & Audit de sécurité</h2>
+  
+  <div className="grid md:grid-cols-2 gap-6">
+    {/* Texte */}
+    <div>
+      <p className="text-white/80 mb-4">
+        Je réalise des tests d'intrusion professionnels pour identifier 
+        les vulnérabilités avant qu'elles ne soient exploitées.
+      </p>
+      <ul className="text-white/70 space-y-2 mb-4">
+        <li>✓ Pentesting web & réseau</li>
+        <li>✓ Audit OWASP Top 10</li>
+        <li>✓ Tests sur smart contracts</li>
+        <li>✓ Rapport détaillé sous 4 jours</li>
+      </ul>
+      <Link
+        to="/pentest"
+        className="inline-flex items-center gap-2 px-6 py-3 rounded-lg 
+                   font-semibold bg-gradient-to-r from-[#00FF99] to-[#00DD88] text-black
+                   hover:scale-105 transition-all"
+      >
+        Voir les offres
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </Link>
+    </div>
+
+    {/* Mini terminal simple (sans animation) */}
+    <div className="bg-black rounded-xl border border-green-500/30 overflow-hidden">
+      <div className="bg-gray-900 px-4 py-2 flex items-center gap-2 border-b border-white/10">
+        <div className="w-3 h-3 rounded-full bg-red-500" />
+        <div className="w-3 h-3 rounded-full bg-yellow-500" />
+        <div className="w-3 h-3 rounded-full bg-green-500" />
+      </div>
+      <div className="p-4 font-mono text-xs space-y-1">
+        <div className="text-green-400">$ nmap -sV target.com</div>
+        <div className="text-blue-400">[INFO] Scanning ports...</div>
+        <div className="text-red-400">[CRITICAL] 8 vulnerabilities found</div>
+        <div className="text-yellow-400">→ SQL Injection detected</div>
+        <div className="text-yellow-400">→ XSS vulnerability found</div>
+        <div className="text-white/50">...</div>
+      </div>
+    </div>
+  </div>
+</motion.section>
 
         {/* --- CTA Offres Pentest --- */}
         <motion.section
