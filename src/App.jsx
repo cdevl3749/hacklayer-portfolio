@@ -321,17 +321,17 @@ export default function App() {
 
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-         <form
+        <form
   name="contact"
   method="POST"
   data-netlify="true"
   data-netlify-honeypot="bot-field"
-  action="/"
   onSubmit={(e) => {
     e.preventDefault();
     const form = e.target;
-
     const newErrors = {};
+
+    // --- Validation simple ---
     if (!form.nom.value.trim()) newErrors.nom = "Nom requis";
     if (!form.email.value.trim()) newErrors.email = "Email requis";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value))
@@ -344,9 +344,36 @@ export default function App() {
     }
 
     setErrors({});
-    form.submit(); // ✅ Envoi natif Netlify (plus de fetch)
-    form.reset();
-    setSubmitted(true);
+
+    const encode = (data) =>
+      Object.keys(data)
+        .map(
+          (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+        )
+        .join("&");
+
+    const data = {
+      "form-name": form.getAttribute("name"),
+      nom: form.nom.value,
+      email: form.email.value,
+      message: form.message.value,
+    };
+
+    // ✅ Envoi via Netlify sans redirection
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode(data),
+    })
+      .then((response) => {
+        if (response.ok) {
+          form.reset();
+          setSubmitted(true);
+        } else {
+          alert("❌ Erreur d'envoi du formulaire");
+        }
+      })
+      .catch(() => alert("❌ Erreur réseau — veuillez réessayer"));
   }}
 >
   <input type="hidden" name="form-name" value="contact" />
@@ -357,6 +384,7 @@ export default function App() {
     </label>
   </p>
 
+  {/* --- Nom --- */}
   <label className="block text-sm text-white/80">Nom</label>
   <input
     name="nom"
@@ -367,10 +395,11 @@ export default function App() {
   />
   {errors?.nom && <p className="text-red-400 text-sm mt-1">{errors.nom}</p>}
 
+  {/* --- Email --- */}
   <label className="block text-sm text-white/80 mt-4">Email</label>
   <input
-    type="email"
     name="email"
+    type="email"
     required
     className={`w-full mt-1 p-3 rounded-md bg-black/40 border ${
       errors?.email ? "border-red-500" : "border-white/6"
@@ -378,11 +407,12 @@ export default function App() {
   />
   {errors?.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
 
+  {/* --- Message --- */}
   <label className="block text-sm text-white/80 mt-4">Message</label>
   <textarea
     name="message"
-    required
     rows="5"
+    required
     className={`w-full mt-1 p-3 rounded-md bg-black/40 border ${
       errors?.message ? "border-red-500" : "border-white/6"
     } text-white focus:border-green-400 outline-none`}
@@ -407,17 +437,18 @@ export default function App() {
   </div>
 </form>
 
+{/* ✅ Message de confirmation sur la même page */}
+{submitted && (
+  <motion.div
+    initial={{ opacity: 0, y: 6 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="mt-4 p-3 rounded-lg bg-black/50 border border-white/6 text-white"
+  >
+    Merci — votre message a bien été envoyé. Je vous réponds
+    rapidement à l'adresse fournie.
+  </motion.div>
+)}
 
-              {submitted && (
-                <motion.div
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mt-4 p-3 rounded-lg bg-black/50 border border-white/6 text-white"
-                >
-                  Merci — votre message a bien été envoyé. Je vous réponds
-                  rapidement à l'adresse fournie.
-                </motion.div>
-              )}
             </div>
 
             <div className="p-4 rounded-lg bg-black/40 border border-white/6">
