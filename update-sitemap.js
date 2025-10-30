@@ -1,22 +1,21 @@
 // update-sitemap.js
-// 🔄 Script pour mettre à jour automatiquement les balises <lastmod> du sitemap.xml
-
 import fs from "fs";
 import path from "path";
 
-// 1️⃣ Chemin du fichier sitemap
 const sitemapPath = path.resolve("public", "sitemap.xml");
+const infoPath = path.resolve("public", "site-info.json");
 
-// 2️⃣ Lis le fichier
-let xml = fs.readFileSync(sitemapPath, "utf8");
-
-// 3️⃣ Génère la date du jour au format ISO (ex: 2025-10-30)
+// Date du jour au format ISO (AAAA-MM-JJ)
 const today = new Date().toISOString().split("T")[0];
 
-// 4️⃣ Remplace toutes les balises <lastmod> par la date du jour
+// --- Mise à jour du sitemap ---
+let xml = fs.readFileSync(sitemapPath, "utf8");
 xml = xml.replace(/<lastmod>.*?<\/lastmod>/g, `<lastmod>${today}</lastmod>`);
-
-// 5️⃣ Réécris le fichier
 fs.writeFileSync(sitemapPath, xml, "utf8");
 
-console.log(`✅ Sitemap mis à jour avec la date ${today}`);
+// --- Création du fichier JSON ---
+const info = { lastUpdate: today };
+fs.writeFileSync(infoPath, JSON.stringify(info, null, 2), "utf8");
+
+console.log(`✅ Sitemap mis à jour et date enregistrée (${today})`);
+
